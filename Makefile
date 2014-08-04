@@ -4,9 +4,12 @@ REBAR=$(PWD)/rebar
 
 all: compile
 
-compile:
+compile: deps
     $(REBAR) compile
-    
+
+deps:
+	test -d deps || $(REBAR) get-deps
+
 test: compile
 	$(REBAR) eunit   
     

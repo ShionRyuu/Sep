@@ -11,7 +11,7 @@ Sep, short for simple erlang protobuf, is a simple erlang version of protobuf.
 privilege
 2> rd(kv_pair, {key = 0, val = 0}).
 kv_pair
-3> R1 = #privilege{id = 2, role_id      = 2, name = "liu", data = [#kv_pair{key
+3> R1 = #privilege{id = 2, role_id = 2, name = "liu", data = [#kv_pair{key
 = 5, val = 14}]}.
 #privilege{id = 2,role_id = 2,name = "liu",
            data = [#kv_pair{key = 5,val = 14}]}
@@ -26,9 +26,11 @@ kv_pair
 
 ## Protobuf-like syntax
 
+```
 message [ProtocolName] [ProtocolNum] {
 	[required, repeated] [int8, int16, int32, string, user-def type] Identifier = DefaultValue
 }
+```
 
 ## Authors
 
