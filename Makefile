@@ -1,4 +1,4 @@
-.PHONY: compile test clean
+.PHONY: compile test clean deps
 
 REBAR=$(PWD)/rebar
 
