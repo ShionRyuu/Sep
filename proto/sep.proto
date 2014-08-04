@@ -1,0 +1,16 @@
+// protobuf-like syntax
+
+message privilege 1001 {
+	required int16 id = 0,
+	required int32 role_id = 0,
+	required string name = "",
+	repeated kv_pair data = []
+}
+
+message kv_pair 1002 {
+	required int16 key = 0,
+	required int32 val = 0
+}
+
+
+

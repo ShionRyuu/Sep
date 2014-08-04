@@ -1,0 +1,6 @@
+{application, sep, [
+    {description, "A simple erlang proto"},
+    {vsn, {cmd, "echo `cat VERSION`"}},
+    {applications, [kernel, stdlib]},
+    {registered, [sep]}
+]}.
