@@ -44,4 +44,4 @@ php ./script/proto_gen.php sep
 
 ## Todo
 
-1. script used for generate erl and as3 files from .proto
+1. script used for generating erl and as3 files from .proto
