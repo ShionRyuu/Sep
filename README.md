@@ -32,6 +32,12 @@ message [ProtocolName] [ProtocolNum] {
 }
 ```
 
+## Script
+
+``` 
+php ./script/proto_gen.php sep
+```
+
 ## Authors
 
 - Shion Ryuu <genesislive@outlook.com>
