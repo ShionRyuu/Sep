@@ -28,13 +28,13 @@ kv_pair
 
 ```
 message [ProtocolName] [ProtocolNum] {
-	[required, repeated] [int8, int16, int32, string, user-def type] Identifier = DefaultValue
+	[required, repeated] [int8, int16, int32, string, user-def type] Identifier[ = DefaultValue];
 }
 ```
 
 ## Script
 
-``` 
+```sh
 php ./script/proto_gen.php sep
 ```
 
@@ -44,4 +44,4 @@ php ./script/proto_gen.php sep
 
 ## Todo
 
-1. script used for generating erl and as3 files from .proto
+1. script used for generating .erl and .as3 files from .proto file

@@ -12,7 +12,7 @@ $module_name = $argv[1];
 define('BASE_DIR', dirname(__DIR__));
 $proto_file_name = BASE_DIR . "/proto/$module_name.proto";
 if (!file_exists($proto_file_name)) {
-    exit();
+    exit("file is not exists $proto_file_name");
 }
 $proto_str_array = file($proto_file_name);
 //$proto = '// protobuf-like syntax
@@ -75,9 +75,13 @@ foreach ($proto_str_array as $_row) {
             }else {
                 $messages[$m_name][]    =   "{list, $type}";
             }
-            unset($key_words[0]);
-            unset($key_words[1]);
-            $default_value = implode(' ', $key_words);
+            if (count($key_words ) > 3) {
+                unset($key_words[0]);
+                unset($key_words[1]);
+                $default_value = implode(' ', $key_words);
+            }else if (count($key_words ) == 3){
+                $default_value = $key_words[2];
+            }
             $default_value = substr($default_value, 0, strpos($default_value, ';'));
             $message_defaults[$m_name][] = $default_value;
         }else if($key_words[0]== 'required') {
@@ -126,15 +130,13 @@ foreach($messages as $m_name=> $params) {
 $src_map_erl .= "get_proto_map(_) ->
 	[].
 ";
-// echo $src_map_erl;
 
 $src_hrl = $file_header;
 foreach($message_defaults as $m_name=> $params) {
-    $src_hrl .= "%% metadata: [{$param_map[$m_name]}].\r\n";
+    $src_hrl .= "%% metadata: {$param_map[$m_name]}.\r\n";
     $default_str = implode(', ', $params);
     $src_hrl .= "-record($m_name, { $default_str }). \r\n\r\n";
 }
-// echo $src_hrl;
 
 $src_rec_erl = $file_header;
 $src_rec_erl .= "-module(sep_rec). \r\n\r\n";
@@ -145,7 +147,7 @@ foreach($message_rec as $m_name=> $m_id) {
 }
 $src_rec_erl .=     "get_proto_rec(_) ->
     [].";
-// echo $src_rec_erl;
+
 
 echo "\r\n ---------------\r\n  \r\n";
 if(file_put_contents(BASE_DIR . "/include/$module_name.hrl",$src_hrl )) {
